@@ -16,8 +16,8 @@ cd angel
 - After cloned, follow this step:
 
 ```
-dotnet new sln add Angeloid/Angeloid.csproj
-dotnet new sln add AngeloidTest/AngeloidTest.csproj
+dotnet sln add Angeloid/Angeloid.csproj
+dotnet sln add AngeloidTest/AngeloidTest.csproj
 cd AngeloidTest
 dotnet add reference ../Angeloid/Angeloid.csproj
 ```
