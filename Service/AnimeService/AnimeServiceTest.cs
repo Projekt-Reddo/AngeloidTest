@@ -16,6 +16,7 @@ namespace AngeloidTest
         private ISeasonService _seasonService;
         private ICharacterService _characterService;
         private ITagService _tagService;
+        private ISeiyuuService _seiyuuService;
         protected IAnimeService _animeService;
 
         //Fake data in memory
@@ -269,6 +270,7 @@ namespace AngeloidTest
                 SeasonId = 3,
                 StudioId = 16,
             },
+            
             new Anime
             {
                 AnimeId = 39,
@@ -288,39 +290,41 @@ namespace AngeloidTest
             },
         };
 
-        [SetUp]
-        public void Setup()
-        {
+        [SetUp] 
+        public void OneTimeSetup() {
             //Create option for Fake DB
             var option = new DbContextOptionsBuilder<Context>()
                 .UseInMemoryDatabase(databaseName: "angeloid").Options;
 
             //Add Fake DB to context, service
             _context = new Context(option);
+            _seiyuuService = new SeiyuuService(_context);
+            _characterService = new CharacterService(_context, _seiyuuService);
+            _seasonService = new SeasonService(_context);
+            _tagService = new TagService(_context);
             _animeService = new AnimeService(_context, _seasonService, _characterService, _tagService);
 
-            //Add Fake data to Context
-            _context.Seiyuus.AddRange(seiyuuList);
-            _context.AnimeTags.AddRange(animeTagList);
+            _context.AddRange(studioList);
             _context.Studios.AddRange(studioList);
-            _context.Seasons.AddRange(seasonList);
-            _context.Characters.AddRange(characterList);
-            _context.Tags.AddRange(tagList);
-            _context.Animes.AddRange(animeList);
+            _context.AddRange(seasonList);
+            _context.AddRange(tagList);
+            _context.AddRange(animeTagList);
+            _context.AddRange(animeList);
+            _context.AddRange(seiyuuList);
+            _context.AddRange(characterList);
             _context.SaveChanges();
         }
 
         [TearDown]
         public void TearDown()
         {
-            //Remove Fake DB to re-insert
-            _context.Seiyuus.RemoveRange(seiyuuList);
-            _context.AnimeTags.RemoveRange(animeTagList);
-            _context.Studios.RemoveRange(studioList);
-            _context.Seasons.RemoveRange(seasonList);
-            _context.Characters.RemoveRange(characterList);
-            _context.Tags.RemoveRange(tagList);
-            _context.Animes.RemoveRange(animeList);
+            // _context.RemoveRange(_context.AnimeTags);
+            _context.RemoveRange(_context.Tags);
+            _context.RemoveRange(_context.Animes);
+            _context.RemoveRange(_context.Seiyuus);
+            _context.RemoveRange(_context.Seasons);
+            _context.RemoveRange(_context.Studios);
+            _context.RemoveRange(_context.Characters);
             _context.SaveChanges();
         }
     }
