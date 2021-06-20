@@ -271,6 +271,7 @@ namespace AngeloidTest
                 SeasonId = 3,
                 StudioId = 16,
             },
+            
             new Anime
             {
                 AnimeId = 39,
@@ -427,35 +428,33 @@ namespace AngeloidTest
 
             //Add Fake DB to context, service
             _context = new Context(option);
-            _seasonService = new SeasonService(_context);
             _seiyuuService = new SeiyuuService(_context);
             _characterService = new CharacterService(_context, _seiyuuService);
+            _seasonService = new SeasonService(_context);
             _tagService = new TagService(_context);
             _animeService = new AnimeService(_context, _seasonService, _characterService, _tagService);
 
-            //Add Fake data to Context
-            // _context.Entry(seiyuuList).State = EntityState.Detached;
-            _context.Seiyuus.AddRange(seiyuuList);
+            _context.AddRange(studioList);
             _context.Studios.AddRange(studioList);
-            _context.Seasons.AddRange(seasonList);
-            _context.Tags.AddRange(tagList);
-            _context.Animes.AddRange(animeList);
-            _context.AnimeTags.AddRange(animeTagList);
-            _context.Characters.AddRange(characterList);
+            _context.AddRange(seasonList);
+            _context.AddRange(tagList);
+            _context.AddRange(animeTagList);
+            _context.AddRange(animeList);
+            _context.AddRange(seiyuuList);
+            _context.AddRange(characterList);
             _context.SaveChanges();
         }
 
         [TearDown]
         public void TearDown()
         {
-            //Remove Fake DB to re-insert
-            _context.Characters.RemoveRange(_context.Characters);
-            _context.Seiyuus.RemoveRange(_context.Seiyuus);
-            _context.AnimeTags.RemoveRange(_context.AnimeTags);
-            _context.Animes.RemoveRange(_context.Animes);
-            _context.Studios.RemoveRange(_context.Studios);
-            _context.Seasons.RemoveRange(_context.Seasons);
-            _context.Tags.RemoveRange(_context.Tags);
+            // _context.RemoveRange(_context.AnimeTags);
+            _context.RemoveRange(_context.Tags);
+            _context.RemoveRange(_context.Animes);
+            _context.RemoveRange(_context.Seiyuus);
+            _context.RemoveRange(_context.Seasons);
+            _context.RemoveRange(_context.Studios);
+            _context.RemoveRange(_context.Characters);
             _context.SaveChanges();
         }
     }
