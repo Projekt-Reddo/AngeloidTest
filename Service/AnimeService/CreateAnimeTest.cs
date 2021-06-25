@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace AngeloidTest
 {
-    [TestFixture]
+    // [TestFixture]
     public class CreateAnimeTest : AnimeServiceTest
     {
-        //Test Case for Update user info
+        //Test Case for Create Anime
         public static IEnumerable<TestCaseData> CreateAnimeTestCaseTrue
         {
             get
@@ -54,13 +54,24 @@ namespace AngeloidTest
                         Thumbnail = getRandomBytes(),
                         Status = "Not Air",
                         View = 0,
+                        SeasonId = 4,
+                        StudioId = 132,
+                    }, 1
+                );
+                yield return new TestCaseData(
+                    new Anime
+                    {
+                        AnimeName = "New New New Anime",
+                        Status = "Not Air",
+                        View = 0,
+                        SeasonId = 4,
                         StudioId = 132,
                     }, 1
                 );
             }
         }
 
-        //Test Update User Info method --- TRUE
+        //Test Create Anime method --- TRUE
         [Test]
         [TestCaseSource("CreateAnimeTestCaseTrue")]
         public async Task CreateAnimeTrue(Anime anime, int animeInserted)
