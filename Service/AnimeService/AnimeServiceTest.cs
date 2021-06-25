@@ -21,6 +21,8 @@ namespace AngeloidTest
         protected IAnimeService _animeService;
 
         //Fake data in memory
+
+        // Fake Seasons data
         List<Season> seasonList = new List<Season>()
         {
             new Season {
@@ -45,6 +47,7 @@ namespace AngeloidTest
             },
         };
 
+        // Fake Studios data
         List<Studio> studioList = new List<Studio>()
         {
             new Studio{
@@ -65,6 +68,7 @@ namespace AngeloidTest
             },
         };
 
+        // Fake Characters data
         List<Character> characterList = new List<Character>()
         {
             new Character {
@@ -134,6 +138,7 @@ namespace AngeloidTest
             },
         };
 
+        // Fake Seiyuus data
         List<Seiyuu> seiyuuList = new List<Seiyuu>()
         {
             new Seiyuu{
@@ -178,6 +183,7 @@ namespace AngeloidTest
             },
         };
 
+        // Fake Tags data
         List<Tag> tagList = new List<Tag>()
         {
             new Tag {
@@ -197,6 +203,7 @@ namespace AngeloidTest
             },
         };
 
+        // Fake Anime And Tags table data
         List<AnimeTag> animeTagList = new List<AnimeTag>()
         {
             new AnimeTag
@@ -236,6 +243,7 @@ namespace AngeloidTest
             },
         };
 
+        // Fake Anime data
         List<Anime> animeList = new List<Anime>() {
             new Anime
             {
@@ -271,7 +279,7 @@ namespace AngeloidTest
                 SeasonId = 3,
                 StudioId = 16,
             },
-            
+
             new Anime
             {
                 AnimeId = 39,
@@ -435,10 +443,10 @@ namespace AngeloidTest
             _animeService = new AnimeService(_context, _seasonService, _characterService, _tagService);
 
             _context.AddRange(studioList);
-            _context.Studios.AddRange(studioList);
+            _context.AddRange(studioList);
             _context.AddRange(seasonList);
             _context.AddRange(tagList);
-            _context.AddRange(animeTagList);
+            // _context.AddRange(animeTagList);
             _context.AddRange(animeList);
             _context.AddRange(seiyuuList);
             _context.AddRange(characterList);

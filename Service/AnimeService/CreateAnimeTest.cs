@@ -33,7 +33,7 @@ namespace AngeloidTest
                         Web = "https://myanimelist.net/anime/37450/Seishun_Buta_Yarou_wa_Bunny_Girl_Senpai_no_Yume_wo_Minai",
                         SeasonId = 4,
                         StudioId = 132,
-                        Tags = {
+                        Tags = new [] {
                             new Tag {
                                 TagId = 1,
                                 TagName = "Slice Of Life",
