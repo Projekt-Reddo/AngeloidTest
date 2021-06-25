@@ -1,27 +1,23 @@
 using System.Collections.Generic;
-using System.Text;
 using Angeloid.DataContext;
 using Angeloid.Models;
 using Angeloid.Services;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
+using System.Text;
 
 namespace AngeloidTest
 {
     [TestFixture]
-    public class AnimeServiceTest
+    public class HomeServiceTest
     {
         protected Context _context;
-        private IStudioService _studioService;
         private ISeasonService _seasonService;
         private ICharacterService _characterService;
         private ITagService _tagService;
-        private ISeiyuuService _seiyuuService;
-        protected IAnimeService _animeService;
+        protected IHomePageService _homePageService;
 
         //Fake data in memory
-
-        // Fake Seasons data
         List<Season> seasonList = new List<Season>()
         {
             new Season {
@@ -30,23 +26,22 @@ namespace AngeloidTest
                 SeasonName = "Spring"
             },
             new Season {
-                SeasonId = 2,
+                SeasonId = 1,
                 Year = "2020",
                 SeasonName = "Summer"
             },
             new Season {
-                SeasonId = 3,
+                SeasonId = 1,
                 Year = "2015",
                 SeasonName = "Fall"
             },
             new Season {
-                SeasonId = 4,
+                SeasonId = 1,
                 Year = "2006",
                 SeasonName = "Winter"
             },
         };
 
-        // Fake Studios data
         List<Studio> studioList = new List<Studio>()
         {
             new Studio{
@@ -67,122 +62,57 @@ namespace AngeloidTest
             },
         };
 
-        // Fake Characters data
         List<Character> characterList = new List<Character>()
         {
             new Character {
                 CharacterId = 33,
                 CharacterName = "Chitanda Eru",
                 CharacterRole = "Main",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-                SeiyuuId = 31,
-                AnimeId = 17
+                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd")
             },
             new Character {
                 CharacterId = 34,
                 CharacterName = "Ibara Mayaka",
                 CharacterRole = "Main",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-                SeiyuuId = 32,
-                AnimeId = 17
+                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd")
             },
             new Character {
                 CharacterId = 72,
                 CharacterName = "Tomori Nao",
-                CharacterRole = "Main",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-                SeiyuuId = 68,
-                AnimeId = 29
+                CharacterRole = "Supporting",
+                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd")
             },
             new Character {
                 CharacterId = 73,
                 CharacterName = "Otosaka Yuu",
-                CharacterRole = "Main",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-                SeiyuuId = 69,
-                AnimeId = 29,
-
+                CharacterRole = "Supporting",
+                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd")
             },
             new Character {
                 CharacterId = 111,
                 CharacterName = "Sakurajima Mai",
                 CharacterRole = "Main",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-                SeiyuuId = 94,
-                AnimeId = 39
+                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd")
             },
             new Character {
                 CharacterId = 113,
                 CharacterName = "Futaba Rio",
                 CharacterRole = "Supporting",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-                SeiyuuId = 96,
-                AnimeId = 39
+                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd")
             },
             new Character {
                 CharacterId = 114,
                 CharacterName = "Koga Tomoe",
                 CharacterRole = "Supporting",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-                SeiyuuId = 97,
-                AnimeId = 39
+                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd")
             },
             new Character {
                 CharacterId = 115,
                 CharacterName = "Azusagawa Kaede",
                 CharacterRole = "Supporting",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-                SeiyuuId = 98,
-                AnimeId = 39
+                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd")
             },
         };
-
-        // Fake Seiyuus data
-        List<Seiyuu> seiyuuList = new List<Seiyuu>()
-        {
-            new Seiyuu{
-                SeiyuuId = 31,
-                SeiyuuName = "Satou Satomi",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-            },
-            new Seiyuu{
-                SeiyuuId = 32,
-                SeiyuuName = "Kayano Ai",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-            },
-            new Seiyuu{
-                SeiyuuId = 68,
-                SeiyuuName = "Sakura Ayane",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-            },
-            new Seiyuu{
-                SeiyuuId = 69,
-                SeiyuuName = "Uchiyama Kouki",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-            },
-            new Seiyuu{
-                SeiyuuId = 94,
-                SeiyuuName = "Seto Asami",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-            },
-            new Seiyuu{
-                SeiyuuId = 96,
-                SeiyuuName = "Tanezaki Atsumi",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-            },
-            new Seiyuu{
-                SeiyuuId = 97,
-                SeiyuuName = "Touyama Nao",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-            },
-            new Seiyuu{
-                SeiyuuId = 98,
-                SeiyuuName = "Kubo Yurika",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
-            },
-        };
-
-        // Fake Tags data
         List<Tag> tagList = new List<Tag>()
         {
             new Tag {
@@ -190,59 +120,7 @@ namespace AngeloidTest
                 TagName = "Slice Of Life",
                 TagDescription = ""
             },
-            new Tag {
-                TagId = 2,
-                TagName = "Drama",
-                TagDescription = ""
-            },
-            new Tag {
-                TagId = 3,
-                TagName = "Romance",
-                TagDescription = ""
-            },
         };
-
-        // Fake Anime And Tags table data
-        List<AnimeTag> animeTagList = new List<AnimeTag>()
-        {
-            new AnimeTag
-            {
-                AnimeId = 17,
-                TagId = 1
-            },
-            new AnimeTag
-            {
-                AnimeId = 17,
-                TagId = 3
-            },
-            new AnimeTag
-            {
-                AnimeId = 29,
-                TagId = 2
-            },
-            new AnimeTag
-            {
-                AnimeId = 29,
-                TagId = 3
-            },
-            new AnimeTag
-            {
-                AnimeId = 39,
-                TagId = 1
-            },
-            new AnimeTag
-            {
-                AnimeId = 39,
-                TagId = 2
-            },
-            new AnimeTag
-            {
-                AnimeId = 39,
-                TagId = 3
-            },
-        };
-
-        // Fake Anime data
         List<Anime> animeList = new List<Anime>() {
             new Anime
             {
@@ -258,8 +136,6 @@ namespace AngeloidTest
                 Episode = "22",
                 StartDay = "Apr 23, 2012",
                 Web = "https://myanimelist.net/anime/12189/Hyouka",
-                SeasonId = 1,
-                StudioId = 16,
             },
             new Anime
             {
@@ -275,10 +151,7 @@ namespace AngeloidTest
                 Episode = "13",
                 StartDay = "Jul 5, 2015",
                 Web = "https://myanimelist.net/anime/28999/Charlotte",
-                SeasonId = 3,
-                StudioId = 16,
             },
-
             new Anime
             {
                 AnimeId = 39,
@@ -293,8 +166,6 @@ namespace AngeloidTest
                 Episode = "13",
                 StartDay = "Oct 4, 2018",
                 Web = "https://myanimelist.net/anime/37450/Seishun_Buta_Yarou_wa_Bunny_Girl_Senpai_no_Yume_wo_Minai",
-                SeasonId = 4,
-                StudioId = 132,
             },
         };
 
@@ -307,33 +178,24 @@ namespace AngeloidTest
 
             //Add Fake DB to context, service
             _context = new Context(option);
-            _seiyuuService = new SeiyuuService(_context);
-            _characterService = new CharacterService(_context, _seiyuuService);
-            _seasonService = new SeasonService(_context);
-            _tagService = new TagService(_context);
-            _animeService = new AnimeService(_context, _seasonService, _characterService, _tagService);
+            _homePageService = new AnimeService(_context, _seasonService, _characterService, _tagService);
 
-            _context.AddRange(studioList);
-            _context.AddRange(studioList);
-            _context.AddRange(seasonList);
-            _context.AddRange(tagList);
-            // _context.AddRange(animeTagList);
-            _context.AddRange(animeList);
-            _context.AddRange(seiyuuList);
-            _context.AddRange(characterList);
+            //Add Fake data to Context
+            _context.Seasons.AddRange(seasonList);
+            _context.Characters.AddRange(characterList);
+            _context.Tags.AddRange(tagList);
+            _context.Animes.AddRange(animeList);
             _context.SaveChanges();
         }
 
         [TearDown]
         public void TearDown()
         {
-            // _context.RemoveRange(_context.AnimeTags);
-            _context.RemoveRange(_context.Tags);
-            _context.RemoveRange(_context.Animes);
-            _context.RemoveRange(_context.Seiyuus);
-            _context.RemoveRange(_context.Seasons);
-            _context.RemoveRange(_context.Studios);
-            _context.RemoveRange(_context.Characters);
+            //Remove Fake DB to re-insert
+            _context.Seasons.RemoveRange(seasonList);
+            _context.Characters.RemoveRange(characterList);
+            _context.Tags.RemoveRange(tagList);
+            _context.Animes.RemoveRange(animeList);
             _context.SaveChanges();
         }
     }
