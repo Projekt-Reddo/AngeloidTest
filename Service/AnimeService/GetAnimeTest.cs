@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace AngeloidTest
 {
     [TestFixture]
-    public class GetAnimeByIdTest : AnimeServiceTest
+    public class GetAnimeTest : AnimeServiceTest
     {
         //Test Case for Update user info
         public static IEnumerable<TestCaseData> GetAnimeTestCaseTrue
