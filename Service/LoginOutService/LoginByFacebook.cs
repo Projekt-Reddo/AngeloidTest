@@ -29,7 +29,6 @@ namespace AngeloidTest
                 yield return new TestCaseData(
                     new User
                     {
-                        UserId = 69,
                         FacebookId = "696969",
                         Fullname = "フユキ シロ",
                         Email = "myfacebookemaillll@gmail.com"
