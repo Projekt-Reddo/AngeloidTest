@@ -216,7 +216,7 @@ namespace AngeloidTest
                         StudioId = 132,
                     }, 100
                 );
-                
+
                 yield return new TestCaseData(
                     new Anime
                     {
