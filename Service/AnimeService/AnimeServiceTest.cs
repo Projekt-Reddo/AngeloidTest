@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Angeloid.DataContext;
@@ -74,7 +75,7 @@ namespace AngeloidTest
                 CharacterId = 33,
                 CharacterName = "Chitanda Eru",
                 CharacterRole = "Main",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                CharacterImage = getRandomBytes(),
                 SeiyuuId = 31,
                 AnimeId = 17
             },
@@ -82,23 +83,23 @@ namespace AngeloidTest
                 CharacterId = 34,
                 CharacterName = "Ibara Mayaka",
                 CharacterRole = "Main",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                CharacterImage = getRandomBytes(),
                 SeiyuuId = 32,
                 AnimeId = 17
             },
             new Character {
                 CharacterId = 72,
                 CharacterName = "Tomori Nao",
-                CharacterRole = "Main",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                CharacterRole = "Supporting",
+                CharacterImage = getRandomBytes(),
                 SeiyuuId = 68,
                 AnimeId = 29
             },
             new Character {
                 CharacterId = 73,
                 CharacterName = "Otosaka Yuu",
-                CharacterRole = "Main",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                CharacterRole = "Supporting",
+                CharacterImage = getRandomBytes(),
                 SeiyuuId = 69,
                 AnimeId = 29,
 
@@ -107,7 +108,7 @@ namespace AngeloidTest
                 CharacterId = 111,
                 CharacterName = "Sakurajima Mai",
                 CharacterRole = "Main",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                CharacterImage = getRandomBytes(),
                 SeiyuuId = 94,
                 AnimeId = 39
             },
@@ -115,7 +116,7 @@ namespace AngeloidTest
                 CharacterId = 113,
                 CharacterName = "Futaba Rio",
                 CharacterRole = "Supporting",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                CharacterImage = getRandomBytes(),
                 SeiyuuId = 96,
                 AnimeId = 39
             },
@@ -123,7 +124,7 @@ namespace AngeloidTest
                 CharacterId = 114,
                 CharacterName = "Koga Tomoe",
                 CharacterRole = "Supporting",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                CharacterImage = getRandomBytes(),
                 SeiyuuId = 97,
                 AnimeId = 39
             },
@@ -131,7 +132,7 @@ namespace AngeloidTest
                 CharacterId = 115,
                 CharacterName = "Azusagawa Kaede",
                 CharacterRole = "Supporting",
-                CharacterImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                CharacterImage = getRandomBytes(),
                 SeiyuuId = 98,
                 AnimeId = 39
             },
@@ -143,42 +144,42 @@ namespace AngeloidTest
             new Seiyuu{
                 SeiyuuId = 31,
                 SeiyuuName = "Satou Satomi",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                SeiyuuImage = getRandomBytes(),
             },
             new Seiyuu{
                 SeiyuuId = 32,
                 SeiyuuName = "Kayano Ai",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                SeiyuuImage = getRandomBytes(),
             },
             new Seiyuu{
                 SeiyuuId = 68,
                 SeiyuuName = "Sakura Ayane",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                SeiyuuImage = getRandomBytes(),
             },
             new Seiyuu{
                 SeiyuuId = 69,
                 SeiyuuName = "Uchiyama Kouki",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                SeiyuuImage = getRandomBytes(),
             },
             new Seiyuu{
                 SeiyuuId = 94,
                 SeiyuuName = "Seto Asami",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                SeiyuuImage = getRandomBytes(),
             },
             new Seiyuu{
                 SeiyuuId = 96,
                 SeiyuuName = "Tanezaki Atsumi",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                SeiyuuImage = getRandomBytes(),
             },
             new Seiyuu{
                 SeiyuuId = 97,
                 SeiyuuName = "Touyama Nao",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                SeiyuuImage = getRandomBytes(),
             },
             new Seiyuu{
                 SeiyuuId = 98,
                 SeiyuuName = "Kubo Yurika",
-                SeiyuuImage = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                SeiyuuImage = getRandomBytes(),
             },
         };
 
@@ -249,9 +250,9 @@ namespace AngeloidTest
                 AnimeId = 17,
                 AnimeName = "Hyouka",
                 Content = "La la la la la",
-                Thumbnail = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                Thumbnail = getRandomBytes(),
                 Status = "Finished Airing",
-                Wallpaper = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                Wallpaper = getRandomBytes(),
                 Trailer = "https://www.youtube.com/embed/N5nNKAVB4O4?enablejsapi=1&wmode=opaque&autoplay=1",
                 View = 1032178,
                 EpisodeDuration = "25 min per ep",
@@ -266,9 +267,9 @@ namespace AngeloidTest
                 AnimeId = 29,
                 AnimeName = "Charlotte",
                 Content = "La la la la la",
-                Thumbnail = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                Thumbnail = getRandomBytes(),
                 Status = "Finished Airing",
-                Wallpaper = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                Wallpaper = getRandomBytes(),
                 Trailer = "https://www.youtube.com/embed/6AgEzww-a0w?enablejsapi=1&wmode=opaque&autoplay=1",
                 View = 1174381,
                 EpisodeDuration = "24 min per ep",
@@ -284,9 +285,128 @@ namespace AngeloidTest
                 AnimeId = 39,
                 AnimeName = "Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai",
                 Content = "La la la la la",
-                Thumbnail = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                Thumbnail = getRandomBytes(),
                 Status = "Finished Airing",
-                Wallpaper = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
+                Wallpaper = getRandomBytes(),
+                Trailer = "https://www.youtube.com/embed/ku7XxxXpIKI?enablejsapi=1&wmode=opaque&autoplay=1",
+                View = 1119830,
+                EpisodeDuration = "24 min per ep",
+                Episode = "13",
+                StartDay = "Oct 4, 2018",
+                Web = "https://myanimelist.net/anime/37450/Seishun_Buta_Yarou_wa_Bunny_Girl_Senpai_no_Yume_wo_Minai",
+                SeasonId = 4,
+                StudioId = 132,
+            },
+            new Anime
+            {
+                AnimeId = 40,
+                AnimeName = "Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai",
+                Content = "La la la la la",
+                Thumbnail = getRandomBytes(),
+                Status = "Finished Airing",
+                Wallpaper = getRandomBytes(),
+                Trailer = "https://www.youtube.com/embed/ku7XxxXpIKI?enablejsapi=1&wmode=opaque&autoplay=1",
+                View = 1119830,
+                EpisodeDuration = "24 min per ep",
+                Episode = "13",
+                StartDay = "Oct 4, 2018",
+                Web = "https://myanimelist.net/anime/37450/Seishun_Buta_Yarou_wa_Bunny_Girl_Senpai_no_Yume_wo_Minai",
+                SeasonId = 4,
+                StudioId = 132,
+            },
+            new Anime
+            {
+                AnimeId = 41,
+                AnimeName = "Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai",
+                Content = "La la la la la",
+                Thumbnail = getRandomBytes(),
+                Status = "Finished Airing",
+                Wallpaper = getRandomBytes(),
+                Trailer = "https://www.youtube.com/embed/ku7XxxXpIKI?enablejsapi=1&wmode=opaque&autoplay=1",
+                View = 1119830,
+                EpisodeDuration = "24 min per ep",
+                Episode = "13",
+                StartDay = "Oct 4, 2018",
+                Web = "https://myanimelist.net/anime/37450/Seishun_Buta_Yarou_wa_Bunny_Girl_Senpai_no_Yume_wo_Minai",
+                SeasonId = 4,
+                StudioId = 132,
+            },
+            new Anime
+            {
+                AnimeId = 42,
+                AnimeName = "Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai",
+                Content = "La la la la la",
+                Thumbnail = getRandomBytes(),
+                Status = "Finished Airing",
+                Wallpaper = getRandomBytes(),
+                Trailer = "https://www.youtube.com/embed/ku7XxxXpIKI?enablejsapi=1&wmode=opaque&autoplay=1",
+                View = 1119830,
+                EpisodeDuration = "24 min per ep",
+                Episode = "13",
+                StartDay = "Oct 4, 2018",
+                Web = "https://myanimelist.net/anime/37450/Seishun_Buta_Yarou_wa_Bunny_Girl_Senpai_no_Yume_wo_Minai",
+                SeasonId = 4,
+                StudioId = 132,
+            },
+            new Anime
+            {
+                AnimeId = 43,
+                AnimeName = "Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai",
+                Content = "La la la la la",
+                Thumbnail = getRandomBytes(),
+                Status = "Finished Airing",
+                Wallpaper = getRandomBytes(),
+                Trailer = "https://www.youtube.com/embed/ku7XxxXpIKI?enablejsapi=1&wmode=opaque&autoplay=1",
+                View = 1119830,
+                EpisodeDuration = "24 min per ep",
+                Episode = "13",
+                StartDay = "Oct 4, 2018",
+                Web = "https://myanimelist.net/anime/37450/Seishun_Buta_Yarou_wa_Bunny_Girl_Senpai_no_Yume_wo_Minai",
+                SeasonId = 4,
+                StudioId = 132,
+            },
+            new Anime
+            {
+                AnimeId = 44,
+                AnimeName = "Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai",
+                Content = "La la la la la",
+                Thumbnail = getRandomBytes(),
+                Status = "Finished Airing",
+                Wallpaper = getRandomBytes(),
+                Trailer = "https://www.youtube.com/embed/ku7XxxXpIKI?enablejsapi=1&wmode=opaque&autoplay=1",
+                View = 1119830,
+                EpisodeDuration = "24 min per ep",
+                Episode = "13",
+                StartDay = "Oct 4, 2018",
+                Web = "https://myanimelist.net/anime/37450/Seishun_Buta_Yarou_wa_Bunny_Girl_Senpai_no_Yume_wo_Minai",
+                SeasonId = 4,
+                StudioId = 132,
+            },
+            new Anime
+            {
+                AnimeId = 45,
+                AnimeName = "Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai",
+                Content = "La la la la la",
+                Thumbnail = getRandomBytes(),
+                Status = "Finished Airing",
+                Wallpaper = getRandomBytes(),
+                Trailer = "https://www.youtube.com/embed/ku7XxxXpIKI?enablejsapi=1&wmode=opaque&autoplay=1",
+                View = 1119830,
+                EpisodeDuration = "24 min per ep",
+                Episode = "13",
+                StartDay = "Oct 4, 2018",
+                Web = "https://myanimelist.net/anime/37450/Seishun_Buta_Yarou_wa_Bunny_Girl_Senpai_no_Yume_wo_Minai",
+                SeasonId = 4,
+                StudioId = 132,
+            },
+            new Anime
+            {
+                AnimeId = 46,
+                AnimeName = "Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai",
+                Content = "La la la la la",
+                Thumbnail = getRandomBytes(),
+                Status = "Finished Airing",
+                Wallpaper = getRandomBytes(),
                 Trailer = "https://www.youtube.com/embed/ku7XxxXpIKI?enablejsapi=1&wmode=opaque&autoplay=1",
                 View = 1119830,
                 EpisodeDuration = "24 min per ep",
@@ -297,6 +417,15 @@ namespace AngeloidTest
                 StudioId = 132,
             },
         };
+
+        protected static byte[] getRandomBytes() {
+            // Put random bytes into this array.
+            byte[] array = new byte[2000000];
+            // Fill array with random bytes.
+            Random random = new Random();
+            random.NextBytes(array);
+            return array;
+        }
 
         [SetUp]
         public void Setup()

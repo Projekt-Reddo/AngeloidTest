@@ -12,6 +12,7 @@ namespace AngeloidTest
     {
         protected Context _context;
         protected ILogInOutService _logInOutService;
+        protected IUserService _userService;
 
         //Fake data in memory
         List<User> userList = new List<User>() {
@@ -39,7 +40,7 @@ namespace AngeloidTest
             },
             new User {
                 UserId = 3,
-                FacebookId = "34567",
+                FacebookId = null,
                 UserName = "LoliCorn",
                 Password = "admin",
                 Fullname = "Ngo Nguyen Hoang Phuc",
@@ -71,6 +72,7 @@ namespace AngeloidTest
             //Add Fake DB to context, service
             _context = new Context(option);
             _logInOutService = new UserService(_context);
+            _userService = new UserService(_context);
 
             //Add Fake data to Context
             _context.Users.AddRange(userList);
