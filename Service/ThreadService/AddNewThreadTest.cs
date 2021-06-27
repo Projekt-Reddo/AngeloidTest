@@ -18,8 +18,16 @@ namespace AngeloidTest.Service.ThreadService
                     {
                         Title = "Thread 3",
                         Content = "Thread 3 Content",
-                        Image = null,
                         UserId = 1
+                    }
+                );
+                yield return new TestCaseData(
+                    new Thread
+                    {
+                        Title = "Thread 1",
+                        Content = "Thread 1 Content",
+                        Image = getRandomBytes(),
+                        UserId = 2
                     }
                 );
             }

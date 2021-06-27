@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Angeloid.DataContext;
 using Angeloid.Models;
@@ -54,6 +55,15 @@ namespace AngeloidTest
                 IsAdmin = false
             }
         };
+
+        protected static byte[] getRandomBytes() {
+            // Put random bytes into this array.
+            byte[] array = new byte[2000000];
+            // Fill array with random bytes.
+            Random random = new Random();
+            random.NextBytes(array);
+            return array;
+        }
 
         [SetUp]
         public void Setup()
