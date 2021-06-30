@@ -24,6 +24,40 @@ namespace AngeloidTest.Service.ThreadService
                 );
             }
         } 
+        public static IEnumerable<TestCaseData> AddNewThreadTestCaseFalse
+        {
+            get
+            {
+                // yield return new TestCaseData(
+                //     new Thread
+                //     {
+                //         Title = "",
+                //         Content = "Thread 3 Content",
+                //         Image = null,
+                //         UserId = 1
+                //     }
+                // );
+                // yield return new TestCaseData(
+                //     new Thread
+                //     {
+                //         Title = "tí te",
+                //         Content = "",
+                //         Image = null,
+                //         UserId = 1
+                //     }
+                // );
+                yield return new TestCaseData(
+                    new Thread
+                    {
+                        Title = "tí te",
+                        Content = "ádasdasdasd",
+                        Image = null,
+                        // user ID not in db
+                        UserId = 3
+                    }
+                );
+            }
+        } 
 
         [Test]
         [TestCaseSource("AddNewThreadTestCaseTrue")]
@@ -37,6 +71,17 @@ namespace AngeloidTest.Service.ThreadService
             //Assert
             Assert.Greater(rs,0);
         }
+        [Test]
+        [TestCaseSource("AddNewThreadTestCaseFalse")]
+        public async Task AddNewThreadFalse(Thread thread)
+        {
+            //Arrange in TestCaseSource
 
+            //Act
+            var rs = await _threadService.AddNewThread(thread);
+
+            //Assert
+            Assert.AreEqual(0, rs);
+        }
     }
 }
