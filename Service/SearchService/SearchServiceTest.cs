@@ -1,15 +1,15 @@
-using System;
 using System.Collections.Generic;
 using Angeloid.DataContext;
 using Angeloid.Models;
 using Angeloid.Services;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
+using System;
 
 namespace AngeloidTest
 {
     [TestFixture]
-    public class AnimeServiceTest
+    public class SearchServiceTest
     {
         protected Context _context;
         private IStudioService _studioService;
@@ -17,7 +17,8 @@ namespace AngeloidTest
         private ICharacterService _characterService;
         private ITagService _tagService;
         private ISeiyuuService _seiyuuService;
-        protected IAnimeService _animeService;
+        private IAnimeService _animeService;
+        protected ISearchService _searchService;
 
         //Fake data in memory
 
@@ -417,7 +418,8 @@ namespace AngeloidTest
             },
         };
 
-        protected static byte[] getRandomBytes() {
+        protected static byte[] getRandomBytes()
+        {
             // Put random bytes into this array.
             byte[] array = new byte[2000000];
             // Fill array with random bytes.
@@ -425,6 +427,7 @@ namespace AngeloidTest
             random.NextBytes(array);
             return array;
         }
+
 
         [SetUp]
         public void Setup()
@@ -440,11 +443,12 @@ namespace AngeloidTest
             _seasonService = new SeasonService(_context);
             _tagService = new TagService(_context);
             _animeService = new AnimeService(_context, _seasonService, _characterService, _tagService);
+            _searchService = new SearchService(_context);
 
             _context.AddRange(studioList);
             _context.AddRange(seasonList);
             _context.AddRange(tagList);
-            // _context.AddRange(animeTagList);
+            _context.AddRange(animeTagList);
             _context.AddRange(animeList);
             _context.AddRange(seiyuuList);
             _context.AddRange(characterList);
