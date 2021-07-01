@@ -1,15 +1,16 @@
-using System;
 using System.Collections.Generic;
 using Angeloid.DataContext;
 using Angeloid.Models;
 using Angeloid.Services;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
+using System.Text;
+using System;
 
 namespace AngeloidTest
 {
     [TestFixture]
-    public class AnimeServiceTest
+    public class ReviewServiceTest
     {
         protected Context _context;
         private IStudioService _studioService;
@@ -17,7 +18,9 @@ namespace AngeloidTest
         private ICharacterService _characterService;
         private ITagService _tagService;
         private ISeiyuuService _seiyuuService;
-        protected IAnimeService _animeService;
+        private IAnimeService _animeService;
+        private IUserService _userService;
+        protected IReviewService _reviewService;
 
         //Fake data in memory
 
@@ -417,6 +420,60 @@ namespace AngeloidTest
             },
         };
 
+        List<User> userList = new List<User>() {
+            new User {
+                UserId = 1,
+            },
+            new User {
+                UserId = 2,
+            },
+            new User {
+                UserId = 3,
+            },
+            new User {
+                UserId = 4,
+            }
+        };
+
+        List<Review> reviewList = new List<Review>()
+        {
+            new Review
+            {
+                UserId = 1,
+                AnimeId = 17,
+                RateScore = 5,
+                Content = "Love you Chitanda Eru"
+            },
+            new Review
+            {
+                UserId = 2,
+                AnimeId = 17,
+                RateScore = 5,
+                Content = "Miyaka tan"
+            },
+            new Review
+            {
+                UserId = 3,
+                AnimeId = 29,
+                RateScore = 5,
+                Content = "Nao-chan ga daisuki"
+            },
+            new Review
+            {
+                UserId = 1,
+                AnimeId = 29,
+                RateScore = 5,
+                Content = "Naooooooooooooo"
+            },
+            new Review
+            {
+                UserId = 2,
+                AnimeId = 29,
+                RateScore = 4,
+                Content = "Naooooooooooooo"
+            },
+        };
+
         protected static byte[] getRandomBytes() {
             // Put random bytes into this array.
             byte[] array = new byte[2000000];
@@ -434,33 +491,36 @@ namespace AngeloidTest
                 .UseInMemoryDatabase(databaseName: "angeloid").Options;
 
             //Add Fake DB to context, service
-            _context = new Context(option);
+             _context = new Context(option);
             _seiyuuService = new SeiyuuService(_context);
             _characterService = new CharacterService(_context, _seiyuuService);
             _seasonService = new SeasonService(_context);
             _tagService = new TagService(_context);
             _animeService = new AnimeService(_context, _seasonService, _characterService, _tagService);
+            _reviewService = new ReviewService(_context, _animeService, _userService);
 
             _context.AddRange(studioList);
             _context.AddRange(seasonList);
             _context.AddRange(tagList);
-            // _context.AddRange(animeTagList);
+            _context.AddRange(animeTagList);
             _context.AddRange(animeList);
             _context.AddRange(seiyuuList);
             _context.AddRange(characterList);
+            _context.AddRange(reviewList);
+            _context.AddRange(userList);
             _context.SaveChanges();
         }
 
         [TearDown]
         public void TearDown()
         {
-            // _context.RemoveRange(_context.AnimeTags);
             _context.RemoveRange(_context.Tags);
-            _context.RemoveRange(_context.Animes);
             _context.RemoveRange(_context.Seiyuus);
             _context.RemoveRange(_context.Seasons);
             _context.RemoveRange(_context.Studios);
             _context.RemoveRange(_context.Characters);
+            _context.RemoveRange(_context.Users);
+            _context.RemoveRange(_context.Animes);
             _context.SaveChanges();
         }
     }
