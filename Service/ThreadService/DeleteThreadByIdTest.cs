@@ -27,20 +27,34 @@ namespace AngeloidTest.Service.ThreadService
                 yield return new TestCaseData(
                     3
                 );
-
+                yield return new TestCaseData(
+                    4
+                );
             }
         }
-        // [Test]
-        // [TestCaseSource("DeleteThreadByIdTestCaseTrue")]
-        // public async Task DeleteThreadByIdTrue(int threadId)
-        // {
-        //     //Arrange in TestCaseSource
+        [Test]
+        [TestCaseSource("DeleteThreadByIdTestCaseTrue")]
+        public async Task DeleteThreadByIdTrue(int threadId)
+        {
+            //Arrange in TestCaseSource
 
-        //     //Act
-        //     var rs = await _threadService.DeleteThreadById(threadId);
+            //Act
+            var rs = await _threadService.DeleteThreadById(threadId);
 
-        //     //Assert
-        //     Assert.AreEqual(1,rs);
-        // }
+            //Assert
+            Assert.AreEqual(1,rs);
+        }
+        [Test]
+        [TestCaseSource("DeleteThreadByIdTestCaseFalse")]
+        public async Task DeleteThreadByIdFalse(int threadId)
+        {
+            //Arrange in TestCaseSource
+
+            //Act
+            var rs = await _threadService.DeleteThreadById(threadId);
+
+            //Assert
+            Assert.AreEqual(0,rs);
+        }
     }
 }

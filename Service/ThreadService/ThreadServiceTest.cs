@@ -29,6 +29,20 @@ namespace AngeloidTest
                 Content = "Thread 2 Content",
                 Image = null,
                 UserId = 2
+            },
+            new Thread {
+                ThreadId = 3,
+                Title = "Thread Ajinomoto",
+                Content = "Thread Ajinomoto Content",
+                Image = null,
+                UserId = 2
+            },
+            new Thread {
+                ThreadId = 4,
+                Title = "Thread Aji",
+                Content = "Thread Aji Content",
+                Image = null,
+                UserId = 2
             }
         };
          List<User> userList = new List<User>() {
@@ -86,8 +100,8 @@ namespace AngeloidTest
         public void TearDown()
         {
             //Remove Fake DB to re-insert
-            _context.Threads.RemoveRange(threadList);
-            _context.Users.RemoveRange(userList);
+            _context.Threads.RemoveRange(_context.Threads);
+            _context.Users.RemoveRange(_context.Users);
             _context.SaveChanges();
         }
     }
