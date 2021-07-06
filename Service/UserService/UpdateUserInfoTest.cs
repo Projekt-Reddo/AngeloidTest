@@ -42,7 +42,7 @@ namespace AngeloidTest
             var rs = await _userService.UpdateUserInfo(updateUser, userId);
 
             //Assert
-            Assert.That(rs, Is.GreaterThan(0));
+            Assert.AreEqual(1, rs);
         }
 
         //Test Case for Update user info
@@ -53,7 +53,7 @@ namespace AngeloidTest
                 yield return new TestCaseData(
                     new User
                     {
-                        UserId = 1,
+                        UserId = 0,
                         Fullname = "Hoang Vi",
                         Email = "hostcode0301@gmail.com",
                         Gender = "Male",
