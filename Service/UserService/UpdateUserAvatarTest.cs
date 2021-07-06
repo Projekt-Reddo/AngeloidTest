@@ -39,7 +39,7 @@ namespace AngeloidTest
             var rs = await _userService.UpdateUserAvatar(updateUser, userId);
 
             //Assert
-            Assert.Greater(rs, 0);
+            Assert.AreEqual(1, rs);
         }
 
         //Test Case for Update user avatar
@@ -50,7 +50,7 @@ namespace AngeloidTest
                 yield return new TestCaseData(
                     new User
                     {
-                        UserId = 1,
+                        UserId = 0,
                         Avatar = Encoding.ASCII.GetBytes("asdfaw/fawef098asd"),
                     }, 0
                 );
@@ -68,7 +68,7 @@ namespace AngeloidTest
             var rs = await _userService.UpdateUserAvatar(updateUser, userId);
 
             //Assert
-            Assert.AreEqual(rs, 0);
+            Assert.AreEqual(0, rs);
         }
     }
 }

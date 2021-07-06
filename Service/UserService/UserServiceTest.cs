@@ -81,7 +81,7 @@ namespace AngeloidTest
         public void TearDown()
         {
             //Remove Fake DB to re-insert
-            _context.Users.RemoveRange(userList);
+            _context.Users.RemoveRange(_context.Users);
             _context.SaveChanges();
         }
     }
