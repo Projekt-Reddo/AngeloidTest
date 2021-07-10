@@ -31,9 +31,6 @@ namespace AngeloidTest.IntegrationSystem
             //JavaScript setup
             js = (IJavaScriptExecutor)webDriver;
 
-            //Full screen mode
-            webDriver.Manage().Window.Maximize();
-
             //Every line waiting for appear object in 10s
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
