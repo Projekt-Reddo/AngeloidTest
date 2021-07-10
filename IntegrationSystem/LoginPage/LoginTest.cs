@@ -15,7 +15,8 @@ namespace AngeloidTest.IntegrationSystem
         public static List<User> LoginFailedForm = new List<User> {
             new User { UserName = "", Password = "" },
             new User { UserName = "lolicorn", Password = "dbdbd9" },
-            new User { UserName = "Khongtontai", Password = "Khongtontai" }
+            new User { UserName = "Khongtontai", Password = "Khongtontai" },
+            new User { UserName = "1", Password = "1" }
         };
 
 

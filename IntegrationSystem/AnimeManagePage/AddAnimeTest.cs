@@ -49,8 +49,14 @@ namespace AngeloidTest.IntegrationSystem
             // webDriver.Close();
         }
 
+        //Test Case for login
+        public static List<Anime> AnimeFail = new List<Anime> {
+            new Anime { AnimeName = "" },
+            new Anime { AnimeName = "Koe no Katachi" },
+        };
+
         [Test]
-        public void AddAnimeFail([ValueSourceAttribute("BrowserToRunWith")] string browser)
+        public void AddAnimeFail([ValueSourceAttribute("BrowserToRunWith")] string browser, [ValueSourceAttribute("AnimeFail")] Anime inputAnime)
         {
             //Create web driver object
             Setup(browser);
@@ -81,6 +87,47 @@ namespace AngeloidTest.IntegrationSystem
             webDriver.FindElement(By.CssSelector(".nav-link:nth-child(2) > .p-2:nth-child(2)")).Click();
             // 12 | click | linkText=Add new | 
             webDriver.FindElement(By.LinkText("Add new")).Click();
+            // 18 | click | id=animeName | 
+            webDriver.FindElement(By.Id("animeName")).Click();
+            // 19 | type | id=animeName | Anime Name
+            webDriver.FindElement(By.Id("animeName")).SendKeys(inputAnime.AnimeName);
+
+            if (inputAnime != null) {
+                // 20 | click | css=.col-12:nth-child(2) > .form-select | 
+                webDriver.FindElement(By.CssSelector(".col-12:nth-child(2) > .form-select")).Click();
+                // 21 | select | css=.col-12:nth-child(2) > .form-select | label=Studio Pierrot
+                {
+                var dropdown = webDriver.FindElement(By.CssSelector(".col-12:nth-child(2) > .form-select"));
+                dropdown.FindElement(By.XPath("//option[. = 'Studio Pierrot']")).Click();
+                }
+                // 22 | click | id=episodes | 
+                webDriver.FindElement(By.Id("episodes")).Click();
+                // 23 | type | id=episodes | 12
+                webDriver.FindElement(By.Id("episodes")).SendKeys("12");
+                // 24 | click | id=duration | 
+                webDriver.FindElement(By.Id("duration")).Click();
+                // 25 | type | id=duration | 24 min per ep
+                webDriver.FindElement(By.Id("duration")).SendKeys("24 min per ep");
+                // 26 | click | id=description | 
+                webDriver.FindElement(By.Id("description")).Click();
+                // 27 | type | id=description | None
+                webDriver.FindElement(By.Id("description")).SendKeys("None");
+                // 28 | click | css=.my-1:nth-child(3) > .form-select | 
+                webDriver.FindElement(By.CssSelector(".my-1:nth-child(3) > .form-select")).Click();
+                // 29 | select | css=.my-1:nth-child(3) > .form-select | label=Summer
+                {
+                var dropdown = webDriver.FindElement(By.CssSelector(".my-1:nth-child(3) > .form-select"));
+                dropdown.FindElement(By.XPath("//option[. = 'Summer']")).Click();
+                }
+                // 30 | click | css=.my-1:nth-child(4) > .form-select | 
+                webDriver.FindElement(By.CssSelector(".my-1:nth-child(4) > .form-select")).Click();
+                // 31 | select | css=.my-1:nth-child(4) > .form-select | label=2021
+                {
+                var dropdown = webDriver.FindElement(By.CssSelector(".my-1:nth-child(4) > .form-select"));
+                dropdown.FindElement(By.XPath("//option[. = '2021']")).Click();
+                }
+            }
+
             // 13 | click | css=.UploadButton | 
             webDriver.FindElement(By.CssSelector(".UploadButton")).Click();
             // 14 | click | css=.btn-warning | 
@@ -90,9 +137,39 @@ namespace AngeloidTest.IntegrationSystem
             webDriver.Close();
         }
 
+        //Test Case for login
+        public static List<Anime> AnimeTrue = new List<Anime> {
+            new Anime { 
+                AnimeName = Guid.NewGuid().ToString(),
+            },
+            new Anime {
+                AnimeName = Guid.NewGuid().ToString(),
+                Characters = new [] {
+                    new Character {
+                        CharacterName = "Name",
+                        CharacterRole = "Supporting",
+                        Seiyuu = new Seiyuu {
+                            SeiyuuName = Guid.NewGuid().ToString()
+                        }
+                    }
+                }
+            },
+            new Anime {
+                AnimeName = Guid.NewGuid().ToString(),
+                Characters = new [] {
+                    new Character {
+                        CharacterName = "Name",
+                        CharacterRole = "Supporting",
+                        Seiyuu = new Seiyuu {
+                            SeiyuuName = "Hanamura Satomi"
+                        }
+                    }
+                }
+            },
+        };
 
         [Test]
-        public void AddAnimeTrue([ValueSourceAttribute("BrowserToRunWith")] string browser)
+        public void AddAnimeTrue([ValueSourceAttribute("BrowserToRunWith")] string browser, [ValueSourceAttribute("AnimeTrue")] Anime inputAnime)
         {
             //Create web driver object
             Setup(browser);
@@ -136,7 +213,7 @@ namespace AngeloidTest.IntegrationSystem
             // 18 | click | id=animeName | 
             webDriver.FindElement(By.Id("animeName")).Click();
             // 19 | type | id=animeName | Anime Name
-            webDriver.FindElement(By.Id("animeName")).SendKeys(Guid.NewGuid().ToString());
+            webDriver.FindElement(By.Id("animeName")).SendKeys(inputAnime.AnimeName);
             // 20 | click | css=.col-12:nth-child(2) > .form-select | 
             webDriver.FindElement(By.CssSelector(".col-12:nth-child(2) > .form-select")).Click();
             // 21 | select | css=.col-12:nth-child(2) > .form-select | label=Studio Pierrot
@@ -169,6 +246,29 @@ namespace AngeloidTest.IntegrationSystem
             {
             var dropdown = webDriver.FindElement(By.CssSelector(".my-1:nth-child(4) > .form-select"));
             dropdown.FindElement(By.XPath("//option[. = '2021']")).Click();
+            }
+
+            if (inputAnime.Characters != null) {
+                foreach (Character character in inputAnime.Characters) {
+                    // 37 | click | css=.AddCharacterButton | 
+                    webDriver.FindElement(By.CssSelector(".AddCharacterButton")).Click();
+                    // 38 | click | id=characterImage | 
+                    webDriver.FindElement(By.Id("characterImage")).Click();
+                    // 39 | type | id=characterImage | C:\fakepath\E4rTPFXVkAEHYpA.png
+                    webDriver.FindElement(By.Id("characterImage")).SendKeys("C:\\Users\\bapng\\Pictures\\Yuki\\E4rTPFXVkAEHYpA.png");
+                    // 40 | click | id=characterName | 
+                    webDriver.FindElement(By.Id("characterName")).Click();
+                    // 41 | type | id=characterName | nme
+                    webDriver.FindElement(By.Id("characterName")).SendKeys(character.CharacterName);
+                    // 42 | click | id=seiyuuName | 
+                    webDriver.FindElement(By.Id("seiyuuName")).Click();
+                    // 43 | type | id=seiyuuName | name
+                    webDriver.FindElement(By.Id("seiyuuName")).SendKeys(character.Seiyuu.SeiyuuName);
+                    // 44 | click | id=characterRole | 
+                    webDriver.FindElement(By.Id("characterRole")).Click();
+                    // 45 | type | id=characterRole | main
+                    webDriver.FindElement(By.Id("characterRole")).SendKeys(character.CharacterRole);
+                }
             }
 
             actions.MoveToElement(webDriver.FindElement(By.CssSelector(".UploadButton")));
