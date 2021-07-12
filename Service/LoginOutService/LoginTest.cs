@@ -13,7 +13,7 @@ namespace AngeloidTest
     [TestFixture]
     public class LoginTest : LogInOutServiceTest
     {
-        //Test Case for Update user info
+        //Test Case for Login
         public static IEnumerable<TestCaseData> LoginTestCaseTrue
         {
             get
