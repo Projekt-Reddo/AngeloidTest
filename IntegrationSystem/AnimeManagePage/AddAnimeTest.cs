@@ -21,7 +21,7 @@ namespace AngeloidTest.IntegrationSystem
             // Test name: AddAnimeFalse
             // Step # | name | target | value
             // 1 | open | / | 
-            webDriver.Navigate().GoToUrl("http://localhost:3000/");
+            webDriver.Navigate().GoToUrl("https://localhost:3000/");
             // 2 | setWindowSize | 1296x696 | 
             webDriver.Manage().Window.Size = new System.Drawing.Size(1296, 696);
             // 3 | click | linkText=Login | 
@@ -49,10 +49,11 @@ namespace AngeloidTest.IntegrationSystem
             // webDriver.Close();
         }
 
-        //Test Case for login
+        //Test Case for Anime Fail
         public static List<Anime> AnimeFail = new List<Anime> {
             new Anime { AnimeName = "" },
             new Anime { AnimeName = "Koe no Katachi" },
+            new Anime { AnimeName = "test" + Guid.NewGuid().ToString() },
         };
 
         [Test]
@@ -64,7 +65,7 @@ namespace AngeloidTest.IntegrationSystem
             // Test name: AddAnimeFalse
             // Step # | name | target | value
             // 1 | open | / | 
-            webDriver.Navigate().GoToUrl("http://localhost:3000/");
+            webDriver.Navigate().GoToUrl("https://localhost:3000/");
             // 2 | setWindowSize | 1296x696 | 
             webDriver.Manage().Window.Size = new System.Drawing.Size(1296, 696);
             // 3 | click | linkText=Login | 
@@ -128,6 +129,35 @@ namespace AngeloidTest.IntegrationSystem
                 }
             }
 
+            if (inputAnime.AnimeName.StartsWith("test")) {
+                // 20 | click | css=.col-12:nth-child(2) > .form-select | 
+                webDriver.FindElement(By.CssSelector(".col-12:nth-child(2) > .form-select")).Click();
+                // 21 | select | css=.col-12:nth-child(2) > .form-select | label=Studio Pierrot
+                {
+                var dropdown = webDriver.FindElement(By.CssSelector(".col-12:nth-child(2) > .form-select"));
+                dropdown.FindElement(By.XPath("//option[. = 'Studio Pierrot']")).Click();
+                }
+                // 22 | click | id=episodes | 
+                webDriver.FindElement(By.Id("episodes")).Click();
+                // 23 | type | id=episodes | 12
+                webDriver.FindElement(By.Id("episodes")).SendKeys("12");
+                // 24 | click | id=duration | 
+                webDriver.FindElement(By.Id("duration")).Click();
+                // 25 | type | id=duration | 24 min per ep
+                webDriver.FindElement(By.Id("duration")).SendKeys("24 min per ep");
+                // 26 | click | id=description | 
+                webDriver.FindElement(By.Id("description")).Click();
+                // 27 | type | id=description | None
+                webDriver.FindElement(By.Id("description")).SendKeys("None");
+                // 28 | click | css=.my-1:nth-child(3) > .form-select | 
+                webDriver.FindElement(By.CssSelector(".my-1:nth-child(3) > .form-select")).Click();
+                // 29 | select | css=.my-1:nth-child(3) > .form-select | label=Summer
+                {
+                var dropdown = webDriver.FindElement(By.CssSelector(".my-1:nth-child(3) > .form-select"));
+                dropdown.FindElement(By.XPath("//option[. = 'Summer']")).Click();
+                }
+            }
+
             // 13 | click | css=.UploadButton | 
             webDriver.FindElement(By.CssSelector(".UploadButton")).Click();
             // 14 | click | css=.btn-warning | 
@@ -177,7 +207,7 @@ namespace AngeloidTest.IntegrationSystem
             // Test name: AddAnime
             // Step # | name | target | value
             // 1 | open | / | 
-            webDriver.Navigate().GoToUrl("http://localhost:3000/");
+            webDriver.Navigate().GoToUrl("https://localhost:3000/");
             // 2 | setWindowSize | 1296x696 | 
             webDriver.Manage().Window.Size = new System.Drawing.Size(1296, 696);
             // 3 | click | linkText=Login | 

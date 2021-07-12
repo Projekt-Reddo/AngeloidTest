@@ -48,7 +48,7 @@ namespace AngeloidTest.IntegrationSystem
 
 
         [Test]
-        public void LoginTrue([ValueSourceAttribute("BrowserToRunWith")] string browser)
+        public void AddThreadTrue([ValueSourceAttribute("BrowserToRunWith")] string browser)
         {
             //Create web driver object
             Setup(browser);
