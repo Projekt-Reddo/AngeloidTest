@@ -15,7 +15,8 @@ namespace AngeloidTest.IntegrationSystem
         //Set up web driver
         public void Setup(String browserName)
         {
-            switch (browserName) {
+            switch (browserName)
+            {
                 case "chrome":
                     //set up chrome web driver
                     webDriver = new ChromeDriver();
@@ -43,7 +44,8 @@ namespace AngeloidTest.IntegrationSystem
         }
 
         //Test browser list
-        public static IEnumerable<string> BrowserToRunWith() {
+        public static IEnumerable<string> BrowserToRunWith()
+        {
             string[] browsers = {
                 "chrome", "firefox"
             };

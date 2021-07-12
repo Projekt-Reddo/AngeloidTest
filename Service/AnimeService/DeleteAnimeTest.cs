@@ -39,9 +39,8 @@ namespace AngeloidTest
             get
             {
                 yield return new TestCaseData(
-                    "ロクさんが大好きです"
+                    null
                 );
-
                 yield return new TestCaseData(
                     199
                 );
@@ -59,7 +58,7 @@ namespace AngeloidTest
             var rs = await _animeService.DeleteAnime(animeId);
 
             //Assert
-            Assert.That(rs, Is.GreaterThan(0));
+            Assert.That(rs, Is.EqualTo(0));
         }
     }
 }
