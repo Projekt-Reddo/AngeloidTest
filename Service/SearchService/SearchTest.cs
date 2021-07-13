@@ -13,6 +13,7 @@ namespace AngeloidTest
         {
             get
             {
+                // Search an anime by key text
                 yield return new TestCaseData(
                     new Search
                     {
@@ -28,7 +29,7 @@ namespace AngeloidTest
                         }
                     }
                 );
-
+                // Search anime by tag
                 yield return new TestCaseData(
                     new Search
                     {
@@ -44,7 +45,7 @@ namespace AngeloidTest
                         }
                     }
                 );
-
+                // Search anime by season
                 yield return new TestCaseData(
                     new Search
                     {
@@ -60,7 +61,7 @@ namespace AngeloidTest
                         }
                     }
                 );
-
+                // Search an anime by all true attribute
                 yield return new TestCaseData(
                     new Search
                     {
@@ -101,6 +102,7 @@ namespace AngeloidTest
             get
             {
                 yield return new TestCaseData(
+                    // Search with Whitespaces
                     new Search
                     {
                         AnimeName = "                         ",
@@ -114,7 +116,7 @@ namespace AngeloidTest
                         }
                     }
                 );
-
+                // Search anime doesn'exist in database
                 yield return new TestCaseData(
                     new Search
                     {
@@ -129,7 +131,7 @@ namespace AngeloidTest
                         }
                     }
                 );
-
+                // Search an anime with wrong tags
                 yield return new TestCaseData(
                     new Search
                     {

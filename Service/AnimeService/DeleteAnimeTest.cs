@@ -13,6 +13,7 @@ namespace AngeloidTest
         {
             get
             {
+                // Delete an anime in database
                 yield return new TestCaseData(
                     17
                 );
@@ -38,9 +39,11 @@ namespace AngeloidTest
         {
             get
             {
+                // Delete an anime by null id
                 yield return new TestCaseData(
                     null
                 );
+                // Delete an anime doesn't exist in data base
                 yield return new TestCaseData(
                     199
                 );
