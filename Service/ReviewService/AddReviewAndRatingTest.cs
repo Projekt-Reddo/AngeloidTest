@@ -14,6 +14,7 @@ namespace AngeloidTest
         {
             get
             {
+                // Test rate score and add review
                 yield return new TestCaseData(
                     new Review
                     {
@@ -23,6 +24,7 @@ namespace AngeloidTest
                         Content = "Good"
                     }
                 );
+                // Test add review
                 yield return new TestCaseData(
                     new Review
                     {
@@ -31,6 +33,7 @@ namespace AngeloidTest
                         Content = "Good Nice"
                     }
                 );
+                // Test rate score
                 yield return new TestCaseData(
                     new Review
                     {

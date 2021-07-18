@@ -198,6 +198,7 @@ namespace AngeloidTest
         {
             get
             {
+                // Update an anime doesn't exist in database
                 yield return new TestCaseData(
                     new Anime
                     {
@@ -217,6 +218,7 @@ namespace AngeloidTest
                     }, 100
                 );
 
+                // No input
                 yield return new TestCaseData(
                     new Anime
                     {
@@ -237,7 +239,7 @@ namespace AngeloidTest
             var rs = await _animeService.UpdateAnime(anime, animeId);
 
             //Assert
-            Assert.That(rs, Is.GreaterThan(0));
+            Assert.That(rs, Is.EqualTo(0));
         }
     }
 }

@@ -8,113 +8,101 @@ namespace AngeloidTest.IntegrationSystem
     [TestFixture]
     public class UpdateAnimeTest : WebDriverSetUp
     {
-        public static Anime[] AnimeForm = new Anime[] {
-                new Anime
-                    {
-                        AnimeName = "",
-                        Content = "",
-                        Status = "",
-                        Trailer = "",
-                        EpisodeDuration = "",
-                        Episode = "",
-                        StartDay = "",
-                        Web = "",
-                        Season = new Season
-                        {
-                            Year = "",
-                            SeasonName = ""
-                        },
-                        Studio = new Studio
-                        {
-                            StudioName = "",
-                        },
-                        Characters = new[] {
-                            new Character {
-                                CharacterName = "",
-                                CharacterRole = "",
-                                Seiyuu = new Seiyuu {
-                                    SeiyuuName = "",
-                                },
-                            },
-                        },
-                        Tags = new[] {
-                            new Tag {
-                                TagName = "",
-                            }
-                        }
-                    },
+        public static Anime[] AnimeFormTrue = new Anime[] {
+                // Update anime name
                 new Anime
                     {
                         AnimeName = "Kanojo mo kanojo",
-                        Content = "",
-                        Status = "",
-                        Trailer = "",
-                        EpisodeDuration = "",
-                        Episode = "",
-                        StartDay = "",
-                        Web = "",
+                    },
+                // Update season and year
+                new Anime
+                    {
                         Season = new Season
                         {
                             Year = "2000",
                             SeasonName = "Summer"
                         },
-                        Studio = new Studio
-                        {
-                            StudioName = "",
-                        },
-                        Characters = new[] {
-                            new Character {
-                                CharacterName = "",
-                                CharacterRole = "",
-                                Seiyuu = new Seiyuu {
-                                    SeiyuuName = "",
-                                },
-                            },
-                        },
-                        Tags = new[] {
-                            new Tag {
-                                TagName = "",
-                            }
-                        }
                     },
+                // Update Studio
                 new Anime
                     {
-                        AnimeName = "",
-                        Content = "",
-                        Status = "",
-                        Trailer = "",
-                        EpisodeDuration = "",
-                        Episode = "",
-                        StartDay = "",
-                        Web = "",
+                        Studio = new Studio
+                        {
+                            StudioName = "Picona",
+                        }
+                    },
+                // Update Characters
+                new Anime
+                {
+                    Characters = new[] {
+                        new Character{
+                            CharacterName = "Kuriyama Mirai",
+                            CharacterRole = "Main",
+                            Seiyuu = new Seiyuu{
+                                SeiyuuName = "Taneda Risa"
+                            }
+                        }
+                    }
+                },
+
+                // Update Tags
+                new Anime
+                {
+                    Tags = new[] {
+                        new Tag{
+                            TagName = "Comedy",
+                        },
+                        new Tag{
+                            TagName = "Romance",
+                        },
+                        new Tag{
+                            TagName = "Demons",
+                        },
+                    }
+                },
+
+                // Update all attribute
+                new Anime
+                    {
+                        AnimeName = "Kanojo mo kanojo",
                         Season = new Season
                         {
-                            Year = "",
-                            SeasonName = ""
+                            Year = "2021",
+                            SeasonName = "Fall"
                         },
                         Studio = new Studio
                         {
-                            StudioName = "",
+                            StudioName = "MAPPA",
                         },
                         Characters = new[] {
                             new Character {
-                                CharacterName = "",
-                                CharacterRole = "",
+                                CharacterName = "Kiryuu Shino",
+                                CharacterRole = "Supporting",
                                 Seiyuu = new Seiyuu {
-                                    SeiyuuName = "",
+                                    SeiyuuName = "Takahashi Rie",
+                                },
+                            },
+                            new Character {
+                                CharacterName = "Hoshizaki Rika",
+                                CharacterRole = "Main",
+                                Seiyuu = new Seiyuu {
+                                    SeiyuuName = "Taketatsu Ayana",
                                 },
                             },
                         },
                         Tags = new[] {
                             new Tag {
-                                TagName = "",
-                            }
+                                TagName = "Yuri",
+                            },
+                            new Tag {
+                                TagName = "Harem",
+                            },
                         }
                     },
         };
 
         [Test]
-        public void UpdateAnimeTrue([ValueSourceAttribute("BrowserToRunWith")] string browser, [ValueSourceAttribute("AnimeForm")] Anime anime)
+        public void UpdateAnimeTrue([ValueSourceAttribute("BrowserToRunWith")] string browser, [ValueSourceAttribute("AnimeFormTrue")] Anime anime)
         {
             //Create web driver object
             Setup(browser);
@@ -157,7 +145,6 @@ namespace AngeloidTest.IntegrationSystem
 
             //Update Anime Thubnail
             webDriver.FindElement(By.Id("thumbnail")).SendKeys(image);
-            // }
 
             // //Update Anime Wallpaper
             webDriver.FindElement(By.Id("wallpaper")).SendKeys(image);
@@ -165,8 +152,8 @@ namespace AngeloidTest.IntegrationSystem
             // //Update Anime Name
             if (anime.AnimeName != "")
             {
-            webDriver.FindElement(By.Id("animeName")).Clear();
-            webDriver.FindElement(By.Id("animeName")).SendKeys(anime.AnimeName);
+                webDriver.FindElement(By.Id("animeName")).Clear();
+                webDriver.FindElement(By.Id("animeName")).SendKeys(anime.AnimeName);
             }
 
             //Update Anime Studio
@@ -302,6 +289,98 @@ namespace AngeloidTest.IntegrationSystem
                     }
                     count += 1;
                 }
+            }
+
+            //Click "Upload" Button
+            webDriver.FindElement(By.CssSelector(".UploadButton")).Click();
+
+            // Log out
+            webDriver.FindElement(By.LinkText("Logout")).Click();
+
+            // Close windows
+            webDriver.Close();
+        }
+
+        public static Anime[] AnimeFormFalse = new Anime[] {
+            // Not Wallpaper season and Thumbnail
+                new Anime
+                    {
+                        Thumbnail = null,
+                        Wallpaper = null,
+                    },
+                // Not input season and year
+                new Anime
+                    {
+                        Season = new Season
+                        {
+                            Year = "",
+                            SeasonName = ""
+                        },
+                        Studio = new Studio
+                        {
+                            StudioName = "",
+                        },
+                    },
+        };
+
+        public void UpdateAnimeFalse([ValueSourceAttribute("BrowserToRunWith")] string browser, [ValueSourceAttribute("AnimeFormFalse")] Anime anime)
+        {
+            //Create web driver object
+            Setup(browser);
+
+            //Navigate to url
+            webDriver.Navigate().GoToUrl("http://localhost:3000/");
+
+            //Login 
+            webDriver.FindElement(By.LinkText("Login")).Click();
+            webDriver.FindElement(By.Id("username")).Click();
+            webDriver.FindElement(By.Id("username")).SendKeys("dbdbd9");
+            webDriver.FindElement(By.Id("password")).Click();
+            webDriver.FindElement(By.Id("password")).SendKeys("admin");
+            webDriver.FindElement(By.Id("password")).SendKeys(Keys.Enter);
+
+            //Go to Setting page
+            webDriver.FindElement(By.CssSelector(".shadow-sm > div")).Click();
+
+            //Go to Admin page
+            webDriver.FindElement(By.CssSelector(".nav-link:nth-child(4) > .p-2:nth-child(2)")).Click();
+            {
+                var element = webDriver.FindElement(By.CssSelector(".nav-link:nth-child(2) > .p-2:nth-child(2)"));
+                Actions builder = new Actions(webDriver);
+                builder.MoveToElement(element).Perform();
+            }
+
+            //Go to Anime Manage page
+            webDriver.FindElement(By.CssSelector(".nav-link:nth-child(2) > .p-2:nth-child(2)")).Click();
+            {
+                var element = webDriver.FindElement(By.TagName("body"));
+                Actions builder = new Actions(webDriver);
+                builder.MoveToElement(element, 0, 0).Perform();
+            }
+
+            //Select an anime which need to Update
+            webDriver.FindElement(By.CssSelector("tr:nth-child(2) .btn-warning")).Click();
+
+            // Image URL
+            var image = "";
+
+            //Update Anime Thubnail
+            webDriver.FindElement(By.Id("thumbnail")).SendKeys(image);
+
+            //Update Anime Wallpaper
+            webDriver.FindElement(By.Id("wallpaper")).SendKeys(image);
+
+            webDriver.FindElement(By.CssSelector(".my-1:nth-child(3) > .form-select")).Click();
+            {
+                var dropdown = webDriver.FindElement(By.CssSelector(".my-1:nth-child(3) > .form-select"));
+                dropdown.FindElement(By.XPath("//option[. = '" + anime.Season.SeasonName + "']")).Click();
+            }
+
+            //Update Anime Year
+            webDriver.FindElement(By.CssSelector(".my-1:nth-child(4) > .form-select")).Click();
+            {
+                var dropdown = webDriver.FindElement(By.CssSelector(".my-1:nth-child(4) > .form-select"));
+                dropdown.FindElement(By.XPath("//option[. = '" + anime.Season.Year + "']")).Click();
             }
 
             //Click "Upload" Button

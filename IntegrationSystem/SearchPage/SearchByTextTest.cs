@@ -9,24 +9,28 @@ namespace AngeloidTest.IntegrationSystem
     public class SearchByTextTest : WebDriverSetUp
     {
         public static Search[] SearchByTextFormTrue = new Search[] {
+            // Search without input
             new Search{
                 AnimeName = "",
                 Year = "",
                 SeasonName = "",
                 Episode = "",
             },
+            // Search an anime by its name, year and season
             new Search{
                 AnimeName = "tantei",
                 Year = "2021",
                 SeasonName = "Summer",
                 Episode = "",
             },
+            // Search anime by format
             new Search{
                 AnimeName = "",
                 Year = "",
                 SeasonName = "",
                 Episode = "Oneshot/Movie",
             },
+            // Search anime by tags
             new Search{
                 AnimeName = "",
                 Year = "",
@@ -114,6 +118,7 @@ namespace AngeloidTest.IntegrationSystem
         }
 
         public static Search[] SearchByTextFormFalse = new Search[] {
+            // Search anime doesn't exist in database
             new Search{
                 AnimeName = "<script>alert('Love you Bao Loc')</script>",
                 Year = "",
